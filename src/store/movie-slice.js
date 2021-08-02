@@ -3,11 +3,13 @@ import Api from "../services/moviesService";
 
 const movieSlice = createSlice({
   name: "movies",
-  initialState: [],
+  initialState: {
+    data: [],
+  },
   reducers: {
     updateMovieList(state, action) {
       console.log("updated!!");
-      state = action.payload;
+      state.data = action.payload;
     },
   },
 });
