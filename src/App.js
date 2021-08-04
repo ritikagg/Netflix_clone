@@ -1,8 +1,14 @@
 import "./App.css";
-import Movies from "./components/Movies";
+import Movies from "./components/Movie/Movies";
+import SearchForm from "./components/SearchForm/SearchForm";
 
 function App() {
-  return <Movies />;
+  return (
+    <>
+      <SearchForm />
+      <Movies />
+    </>
+  );
 }
 
 export default App;

@@ -21,8 +21,21 @@ export const fetchMoviesFromApi = () => {
       return res.results;
     };
     const movieData = await fetchMovies();
-    console.log(movieData);
+    // console.log(movieData);
     dispatch(movieActions.updateMovieList(movieData));
+  };
+};
+
+export const fetchSearchedData = (searchQuery) => {
+  return async (dispatch) => {
+    const fetchQuery = async () => {
+      // console.log(searchQuery);
+      const res = await Api.getSearch(searchQuery);
+      return res.results;
+    };
+    const searchedData = await fetchQuery();
+    // console.log(searchedData);
+    dispatch(movieActions.updateMovieList(searchedData));
   };
 };
 
