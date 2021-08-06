@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Input, Col, Row } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
 import "./SearchForm.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchSearchedData, fetchMoviesFromApi } from "../../store/movie-slice";
+import Movies from "../Movie/Movies";
+import GenreScroll from "../Movie/GenreScroll";
 
 const SearchForm = () => {
   const [inputText, setInputText] = useState("");
+  const [ifInput, setIfInput] = useState(false);
 
   const handleChange = (e) => {
     setInputText(e.target.value);
@@ -24,14 +26,17 @@ const SearchForm = () => {
     if (inputText !== "") {
       const delayedDebounceFn = setTimeout(() => {
         dispatch(fetchSearchedData(inputText));
+        setIfInput(true);
       }, 1000);
       return () => clearTimeout(delayedDebounceFn);
     } else {
       dispatch(fetchMoviesFromApi());
+      setIfInput(false);
     }
   }, [inputText, dispatch]);
 
-  return (
+  const moviesList = useSelector((state) => state.movie.data);
+  const SearchBox = (
     <Row>
       <Col span={14} offset={5}>
         <form onSubmit={handleSubmit}>
@@ -40,13 +45,17 @@ const SearchForm = () => {
             placeholder="Search a film..."
             onChange={handleChange}
           />
-          <button onClick={handleSubmit}>
-            <SearchOutlined />
-            Search
-          </button>
         </form>
       </Col>
     </Row>
+  );
+
+  return (
+    <>
+      {SearchBox}
+      {ifInput && <Movies />}
+      {!ifInput && <GenreScroll list={moviesList} />}
+    </>
   );
 };
 

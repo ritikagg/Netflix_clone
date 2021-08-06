@@ -1,12 +1,13 @@
 import "./App.css";
-import Movies from "./components/Movie/Movies";
+// import Movies from "./components/Movie/Movies";
 import SearchForm from "./components/SearchForm/SearchForm";
 
 function App() {
   return (
     <>
       <SearchForm />
-      <Movies />
+      {/* <Movies /> */}
+      {/* <GenreScroll /> */}
     </>
   );
 }

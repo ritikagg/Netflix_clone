@@ -8,8 +8,9 @@ const Movies = () => {
   //   dispatch(fetchMoviesFromApi());
   // }, [dispatch]);
 
+  console.log("movies comp");
   const moviesList = useSelector((state) => state.movie.data);
   return <MovieList list={moviesList} />;
 };
 
-export default Movies;
+export default React.memo(Movies);
